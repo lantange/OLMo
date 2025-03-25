@@ -222,7 +222,8 @@ def main(cfg: TrainConfig) -> None:
         param_init_fn = None
         if olmo_model is None:
             raise OLMoConfigurationError("Model initialization failed.")
-        olmo_model = olmo_model.to(device)
+        # olmo_model = olmo_model.to(device)
+        olmo_model = olmo_model.to_empty(device = olmo_model.device)
         dist_model = SingleAccelerator(olmo_model)
 
     # when param_init_fn is None, FSDP will call reset_parameters() automatically
